@@ -15,7 +15,7 @@ list.value.push({
 
 <template>
 	<div>
-		<span v-for="(item, i) in list" :key="i" :class="item.bool ? 'call' : ''">{{item.name}}</span>
+		<span v-for="(item, i) in list" :key="i" :class="item.bool ? 'call' : ''" @click="item.bool = !item.bool">{{item.name}}</span>
 		<hr>
 		<button @click="list[0].bool = !list[0].bool">Toggle 0</button>
 		<button @click="list[1].bool = !list[1].bool">Toggle 1</button>
