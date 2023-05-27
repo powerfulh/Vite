@@ -6,6 +6,10 @@ const r = createRouter({
 		{
 			path: '/',
 			component: () => import('../views/Index.vue')
+		},
+		{
+			path: '/drag',
+			component: () => import('../views/Drag.vue')
 		}
 	]
 })

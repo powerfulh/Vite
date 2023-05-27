@@ -6,6 +6,7 @@ import HelloWorld from './components/HelloWorld.vue'
   <div>
     <router-view />
   </div>
+  <router-link to="drag">드래그</router-link>
   <HelloWorld msg="Vite + Vue" />
 </template>
 
