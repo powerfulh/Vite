@@ -33,11 +33,11 @@ function de(e, i) {
 
 <template>
 	<ul>
-		<li v-for="(item, i) in list" :key="item" draggable="true" @dragstart="ds($event, i)" @drop="drop(i)" @dragover.prevent>{{item.name + ' ' + item.val}}</li>
+		<li v-for="(item, i) in list" :key="i" draggable="true" @dragstart="ds($event, i)" @drop="drop(i)" @dragover.prevent>{{item.name + ' ' + item.val}}</li>
 	</ul>
 	<hr>
 	<ul>
-		<li v-for="(item, i) in list" :key="item" draggable="true" @dragstart="ds($event, i)" @dragenter="de($event, i)" @dragover.prevent>{{item.name + ' ' + item.val}}</li>
+		<li v-for="(item, i) in list" :key="i" draggable="true" @dragstart="ds($event, i)" @dragenter="de($event, i)" @dragover.prevent>{{item.name + ' ' + item.val}}</li>
 	</ul>
 	<!--<button @click="console.log(list)">Print list</button>-->
 </template>

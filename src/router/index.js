@@ -10,6 +10,10 @@ const r = createRouter({
 		{
 			path: '/drag',
 			component: () => import('../views/Drag.vue')
+		},
+		{
+			path: '/drag-util',
+			component: () => import('../views/DragUtil.vue')
 		}
 	]
 })
