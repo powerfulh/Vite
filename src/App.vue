@@ -10,6 +10,7 @@ import HelloWorld from './components/HelloWorld.vue'
   <br>
   <router-link to="drag-util">드래그 모듈</router-link>
   <HelloWorld msg="Vite + Vue" />
+  <img src="/src/assets/vue.svg" alt="Vue 로고">
 </template>
 
 <style scoped>

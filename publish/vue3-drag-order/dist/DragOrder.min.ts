@@ -1,14 +1,11 @@
 import { Ref } from "vue";
-
 let dragging: number
-
 function add({ w, c }: { w: { value: { children: HTMLCollection; }; }; c: any; }, listenerType: 'drop' | 'dragenter', option: Function, cursorCss?: 'move' | 'grab'): void {
 	const hc: HTMLCollection = w.value.children
 	if(c && hc.length < 1) {
 		console.error('기능을 추가할 목록 요소 대상이 없다!')
 		return
 	}
-
 	const list: Array<HTMLElement> = [...hc] as Array<HTMLElement>
 	list.forEach((item, i) => {
 		item.draggable = true
@@ -29,7 +26,6 @@ function add({ w, c }: { w: { value: { children: HTMLCollection; }; }; c: any; }
 		item.style.cursor = cursorCss ? cursorCss : ''
 	})
 }
-
 interface add {
 	(
 		wrap: Ref<HTMLElement>,
@@ -37,7 +33,6 @@ interface add {
 		consoleForDev?: Boolean
 	): void
 }
-
 const dragToDrop: add = function(w, d, c) {
 	add({w, c}, 'drop', function(i: number): void {
 		if(dragging == i) return
@@ -50,7 +45,6 @@ const drag: add = function(w, d, c) {
 		dragging = i
 	}, 'move')
 }
-
 export default {
 	dragToDrop, drag
 }

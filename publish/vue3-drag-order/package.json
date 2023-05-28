@@ -1,0 +1,21 @@
+{
+	"name": "vue3-drag-order",
+	"version": "1.0.0",
+	"description": "Vue3 에서 v-for 로 만든 목록을 드래그를 통해 순서를 바꿀수 있다",
+	"keywords": ["vue3", "drag"],
+	"bugs": {
+		"email": "hanhoon12@naver.com"
+	},
+	"license": "MIT",
+	"author": {
+		"name": "한훈"
+	},
+	"main": "dist/DragOrder.min.ts",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/powerfulh/Vite.git"
+	},
+	"peerDependencies": {
+		"vue": "^3.2.47"
+	}
+}
