@@ -1,6 +1,6 @@
 <script setup>
 import { onMounted, ref } from "vue";
-import dragOrder from "../util/DragOrder";
+import dragOrder from "vue3-drag-order";
 
 const list = ref([
 	{
