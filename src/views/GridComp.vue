@@ -53,7 +53,11 @@ const table = [
 				child: [
 					{
 						name: 'intlCount',
-						label: '관객수'
+						label: '관객수',
+						type: 'button',
+						click: item => {
+							console.log(item)
+						}
 					},
 					{
 						name: 'intlSales',

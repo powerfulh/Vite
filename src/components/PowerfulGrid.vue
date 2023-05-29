@@ -21,6 +21,7 @@ const simpleTable = []
 const info = [[]]
 const finalTable = []
 const checkedList = ref()
+const buttonList = {}
 
 props.list.forEach(item => {
 	for (const key in item) {
@@ -43,6 +44,7 @@ function makeInfo(t, depth) {
 		} else {
 			item.colspan = 1
 			finalTable.push(item.name)
+			if(item.type == 'button') buttonList[item.name] = item.click
 		}
 		if(item.type == 'check') {
 			const field = item.name || item.type
@@ -91,7 +93,8 @@ onMounted(() => {
 				<td v-if="indexCol" class="index-col">{{i}}</td>
 				<td v-for="(td, i1) in finalTable" :key="i1">
 					<input v-if="finalTable.check && td == finalTable.check" type="checkbox" :checked="tr[td]" :value="i" ref="checkedList" @change="$emit('update:modelValue', updateModel())">
-					<span v-else>{{tr[td]}}</span>
+					<button v-else-if="buttonList[td]" @click="buttonList[td](i)">{{tr[td]}}</button>
+					<span v-else>{{numberFormat(tr[td])}}</span>
 				</td>
 			</tr>
 		</tbody>
