@@ -101,7 +101,7 @@ const checkedList = ref([])
 	<powerful-grid :list="list" index-col :table="table" v-model="checkedList"/>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
 table {
 	background: gray;
 	padding: 4px;

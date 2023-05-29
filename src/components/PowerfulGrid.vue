@@ -1,6 +1,6 @@
 <script setup>
 import numeral from "numeral-es6";
-import { onMounted, ref } from "vue";
+import { computed, onMounted, ref } from "vue";
 
 const props = defineProps({
 	list: {
@@ -22,6 +22,13 @@ const info = [[]]
 const finalTable = []
 const checkedList = ref()
 const buttonList = {}
+
+const divTable = computed(() => {
+	const returnList = []
+	props.table.forEach(item => {
+		// 어캐 할까?
+	})
+})
 
 props.list.forEach(item => {
 	for (const key in item) {
@@ -105,6 +112,21 @@ onMounted(() => {
 			</tr>
 		</tbody>
 	</table>
+
+	<div class="root">
+		<div v-if="finalTable.length" class="thead">
+			<div v-for="(item, i) in table" :key="i" class="col-item" :style="{width: item.colspan * 40 + 'px'}">
+				<div v-for="(cr, i1) in info" :key="i1" class="th">
+					<span>{{cr[i].label}}</span>
+				</div>
+			</div>
+		</div>
+		<div v-if="finalTable.length" class="tbody">
+			<div class="tr">
+				tb
+			</div>
+		</div>
+	</div>
 </template>
 
 <style lang="scss" scoped>
@@ -118,6 +140,12 @@ table.default-css {
 	}
 	.index-col {
 		background: darkcyan;
+	}
+}
+div.thead {
+	background: darkblue;
+	> div.col-item {
+		display: inline-block;
 	}
 }
 </style>
