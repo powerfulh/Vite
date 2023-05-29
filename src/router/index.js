@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
+import drag from "./drag.js";
 
 const r = createRouter({
 	history: createWebHistory(import.meta.env.BASE_URL),
@@ -7,17 +8,10 @@ const r = createRouter({
 			path: '/',
 			component: () => import('../views/Index.vue')
 		},
+		...drag,
 		{
-			path: '/drag',
-			component: () => import('../views/Drag.vue')
-		},
-		{
-			path: '/drag-util',
-			component: () => import('../views/DragUtil.vue')
-		},
-		{
-			path: '/drag-npm',
-			component: () => import('../views/DragNpm.vue')
+			path: '/grid-sort',
+			component: () => import('../views/GridSort.vue')
 		}
 	]
 })

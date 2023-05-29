@@ -11,6 +11,8 @@ import HelloWorld from './components/HelloWorld.vue'
   <router-link to="drag-util">드래그 모듈</router-link>
   <br>
   <router-link to="drag-npm">드래그 NPM</router-link>
+  <br>
+  <router-link to="grid-sort">그리드 열 정렬</router-link>
   <HelloWorld msg="Vite + Vue" />
   <img src="/src/assets/vue.svg" alt="Vue 로고">
 </template>
