@@ -10,8 +10,12 @@ const r = createRouter({
 		},
 		...drag,
 		{
-			path: '/grid-sort',
-			component: () => import('../views/GridSort.vue')
+			path: '/grid',
+			component: () => import('../views/Grid.vue')
+		},
+		{
+			path: '/grid-comp',
+			component: () => import('../views/GridComp.vue')
 		}
 	]
 })
