@@ -20,8 +20,8 @@ const dragDrop = ref()
 const drag = ref()
 
 onMounted(() => {
-	dragOrder.dragToDrop(dragDrop, list)
-	dragOrder.drag(drag, list)
+	dragOrder.dragToDrop([...dragDrop.value.children], list)
+	dragOrder.drag([...drag.value.children], list)
 })
 </script>
 
