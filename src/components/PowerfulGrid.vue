@@ -70,6 +70,12 @@ function updateModel() {
 	})
 	return list
 }
+function checkAll(e) {
+	checkedList.value.forEach(item => {
+		item.checked = e.target.checked
+	})
+	emit('update:modelValue', updateModel())
+}
 
 if(props.table) makeInfo(props.table, 0)
 
@@ -84,7 +90,7 @@ onMounted(() => {
 			<tr v-for="(tr, i) in info" :key="i">
 				<th v-if="indexCol && i == 0" :rowspan="info.length" class="index-col">Index</th>
 				<th v-for="(th, i1) in tr" :key="i1" :rowspan="th.child ? 1 : (info.length - i)" :colspan="th.colspan">
-					<input v-if="th.type == 'check'" type="checkbox">
+					<input v-if="th.type == 'check'" type="checkbox" @change="checkAll">
 					<span v-else>{{th.label || th.name}}</span>
 				</th>
 			</tr>
@@ -112,21 +118,6 @@ onMounted(() => {
 			</tr>
 		</tbody>
 	</table>
-
-	<div class="root">
-		<div v-if="finalTable.length" class="thead">
-			<div v-for="(item, i) in table" :key="i" class="col-item" :style="{width: item.colspan * 40 + 'px'}">
-				<div v-for="(cr, i1) in info" :key="i1" class="th">
-					<span>{{cr[i].label}}</span>
-				</div>
-			</div>
-		</div>
-		<div v-if="finalTable.length" class="tbody">
-			<div class="tr">
-				tb
-			</div>
-		</div>
-	</div>
 </template>
 
 <style lang="scss" scoped>
