@@ -1,13 +1,7 @@
 import { Ref } from "vue";
 let dragging: number
-function add({ w, c }: { w: { value: { children: HTMLCollection; }; }; c: any; }, listenerType: 'drop' | 'dragenter', option: Function, cursorCss?: 'move' | 'grab'): void {
-	const hc: HTMLCollection = w.value.children
-	if(c && hc.length < 1) {
-		console.error('기능을 추가할 목록 요소 대상이 없다!')
-		return
-	}
-	const list: Array<HTMLElement> = [...hc] as Array<HTMLElement>
-	list.forEach((item, i) => {
+function add({ w, c }: { w: Array<HTMLElement>; c: any; }, listenerType: 'drop' | 'dragenter', option: Function, cursorCss?: 'move' | 'grab'): void {
+	w.forEach((item, i) => {
 		item.draggable = true
 		item.addEventListener('dragstart', e => {
 			if(e.dataTransfer != null) {
@@ -15,7 +9,7 @@ function add({ w, c }: { w: { value: { children: HTMLCollection; }; }; c: any; }
 				dragging = i
 				return
 			}
-			console.error('DragEvent 에 dataTransfer가 null 입니다!')
+			if(c) console.error('DragEvent 에 dataTransfer가 null 입니다!')
 		})
 		item.addEventListener('dragover', e => {
 			e.preventDefault()
@@ -28,7 +22,7 @@ function add({ w, c }: { w: { value: { children: HTMLCollection; }; }; c: any; }
 }
 interface add {
 	(
-		wrap: Ref<HTMLElement>,
+		dragList: Array<HTMLElement>,
 		dataList: Ref<Array<any>>,
 		consoleForDev?: Boolean
 	): void
