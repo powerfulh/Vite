@@ -6,6 +6,7 @@ const r = createRouter({
 	routes: [
 		{
 			path: '/',
+			name: '인덱스',
 			component: () => import('../views/Index.vue')
 		},
 		...drag,
@@ -16,6 +17,11 @@ const r = createRouter({
 		{
 			path: '/grid-comp',
 			component: () => import('../views/GridComp.vue')
+		},
+		{
+			path: '/t',
+			name: 'Test',
+			component: () => import('../views/TeSt.vue')
 		}
 	]
 })

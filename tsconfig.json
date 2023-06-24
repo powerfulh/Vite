@@ -9,5 +9,6 @@
 			"DOM", // console 같은 dom 관련 변수, 함수 (lib 옵션이 없으면 기본값인데 있으니까 명시해야 함)
 			"ES2018", // Promise.finally
 		]
-	}
+	},
+	"include": ["**/*.ts"] // ts파일만 (.vue는 js 사용)
 }
