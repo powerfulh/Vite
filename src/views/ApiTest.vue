@@ -1,11 +1,22 @@
 <script setup>
-import { ref } from "vue";
+import { ref, warn } from "vue";
+import api from "../util/axioswagger2";
 
 const id = ref('')
 const pw = ref('')
 
 function c() {
-	console.log(api)
+	api.load('loginUsingPOST').setParameter({
+		id,
+		pw
+	}).setWhenSuccess(res => {
+		console.log(res)
+	}).setWhenError(err => {
+		console.warn(err)
+	}).fire()
+}
+function getOI() {
+	console.log(api.getApiFromSwag)
 }
 </script>
 
@@ -13,5 +24,7 @@ function c() {
 	<div>
 		<input v-model="id" type="text">
 		<input v-model="pw" type="text" @keyup.enter="c">
+		<br>
+		<button @click="getOI">Operation ID</button>
 	</div>
 </template>

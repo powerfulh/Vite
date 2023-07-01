@@ -1,20 +1,16 @@
 import axios from 'axios'
 import {Method, AxiosRequestConfig, AxiosResponse} from 'axios'
 import { unref } from 'vue'
-//import swag from '../swag.json'
-const swag = {
-    paths: []
-}
-//import {loadKey} from './from-swag'
+import swag from '@/swag.json'
+import {loadKey} from './from-swag'
 
 interface axiosParameter {
-
     name: string
-
     required: Boolean
-
-    in?: 'path' | 'query'
-
+    in?: 'path' | 'query' | 'body'
+    schema?: {
+        $ref: String
+    }
 }
 
 interface axiosItem {
@@ -67,7 +63,10 @@ Object.keys(swag.paths).forEach(item => {
 
     Object.keys(swag.paths[item]).forEach(method => {
 
-        const apiItem = swag.paths[item][method]
+        const apiItem: {
+            parameters: Array<axiosParameter>
+            operationId: loadKey
+        } = swag.paths[item][method]
 
         const prop: axiosItem = {
 
@@ -78,8 +77,15 @@ Object.keys(swag.paths).forEach(item => {
         }
 
         if (apiItem.parameters) {
-
-            prop.parameters = apiItem.parameters
+            prop.parameters = []
+            apiItem.parameters.forEach(paramItem => {
+                if(paramItem.in != 'body') prop.parameters.push(paramItem)
+                else {
+                    const ref = findBy$ref(paramItem.schema.$ref)
+                    prop.parameters.push(...refToParameters(ref))
+                }
+            })
+            //prop.parameters = apiItem.parameters
 
             prop.validateParameter = target => {
 
@@ -115,13 +121,11 @@ Object.keys(swag.paths).forEach(item => {
 
         }
 
-        if(apiItem.requestBody && apiItem.requestBody.content['application/json']) { // multipart/form-data는 생략
-
-            const ref = findBy$ref(apiItem.requestBody.content['application/json'].schema.$ref)
-
-            prop.parameters = refToParameters(ref)
-
-        }
+        // 스웨거2에는 requestBody 없음
+        //if(apiItem.requestBody && apiItem.requestBody.content['application/json']) { // multipart/form-data는 생략
+        //    const ref = findBy$ref(apiItem.requestBody.content['application/json'].schema.$ref)
+        //    prop.parameters = refToParameters(ref)
+        //}
 
         a[apiItem.operationId] = prop
 
@@ -158,7 +162,7 @@ function refToParameters(ref:$ref): Array<axiosParameter> {
 
         name: item,
 
-        required: ref.required.includes(item)
+        required: ref.required ? ref.required.includes(item) : false
 
     }))
 
@@ -254,7 +258,7 @@ const Axios = {
 
             method: l.type,
 
-            url: import.meta.env.VITE_BACKEND + (l.setedUrl || l.url),
+            url: 'http://localhost:8000' + (l.setedUrl || l.url),
 
             data: l.parameters ? l.parameters.reduce((r, item) => {
 
@@ -276,15 +280,7 @@ const Axios = {
 
         const call = axios(c)
 
-        if(s) call.then(res => {
-
-            if(res.data.error && e) e(res.data.error)
-
-            else if(res.data.error) s(res.data.error)
-
-            else s(res.data.result)
-
-        })
+        if(s) call.then(s)
 
         if(e) call.catch(e)
 
