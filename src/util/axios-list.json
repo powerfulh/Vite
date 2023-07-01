@@ -1,7 +1,0 @@
-[
-	{
-		"name": "getSomeData",
-		"type": "GET",
-		"url": "/v1/some/url"
-	}
-]

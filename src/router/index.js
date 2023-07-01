@@ -22,7 +22,11 @@ const r = createRouter({
 			path: '/t',
 			name: 'Test',
 			component: () => import('../views/TeSt.vue')
-		}
+		},
+		{
+			path: '/api-test',
+			component: () => import('../views/ApiTest.vue')
+		},
 	]
 })
 
