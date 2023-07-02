@@ -1,9 +1,11 @@
 <script setup>
-import { ref, warn } from "vue";
+import { ref } from "vue";
 import api from "../util/axioswagger2";
 
 const id = ref('')
 const pw = ref('')
+const catchMe = ''
+let abc
 
 function c() {
 	api.load('loginUsingPOST').setParameter({
