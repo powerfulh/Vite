@@ -2,7 +2,7 @@ import axios from 'axios'
 import {Method, AxiosRequestConfig, AxiosResponse} from 'axios'
 import { unref } from 'vue'
 import swag from '@/swag.json'
-import {loadKey} from './from-swag'
+import {operationId} from './from-swag'
 
 interface axiosParameter {
     name: string
@@ -65,7 +65,7 @@ Object.keys(swag.paths).forEach(item => {
 
         const apiItem: {
             parameters: Array<axiosParameter>
-            operationId: loadKey
+            operationId: operationId
         } = swag.paths[item][method]
 
         const prop: axiosItem = {
@@ -170,7 +170,7 @@ function refToParameters(ref:$ref): Array<axiosParameter> {
 
 const Axios = {
 
-    load: (v: loadKey) => {
+    load: (v: operationId) => {
 
         if(a[v]) {
 

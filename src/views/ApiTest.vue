@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from "vue";
 import api from "../util/axioswagger2";
+import api2 from "../util/spring-foxios";
 
 const id = ref('')
 const pw = ref('')
@@ -20,6 +21,18 @@ function c() {
 function getOI() {
 	console.log(api.getApiFromSwag)
 }
+function get2() {
+	api2.get()
+}
+function Fire2() {
+	api2.get('memberUsingGET').setParameter({
+		id
+	}).setWhenSuccess(res => {
+		console.log(res)
+	}).setWhenError(err => {
+		console.log(err)
+	}).fire()
+}
 </script>
 
 <template>
@@ -28,5 +41,9 @@ function getOI() {
 		<input v-model="pw" type="text" @keyup.enter="c">
 		<br>
 		<button @click="getOI">Operation ID</button>
+		<br>
+		<button @click="get2">Test</button>
+		<br>
+		<input v-model="id" type="text" @keyup.enter="Fire2">
 	</div>
 </template>

@@ -285,7 +285,7 @@
 					{
 						"name": "pw",
 						"in": "query",
-						"required": false,
+						"required": true,
 						"type": "string"
 					},
 					{
@@ -1293,7 +1293,7 @@
 					{
 						"name": "pw",
 						"in": "query",
-						"required": false,
+						"required": true,
 						"type": "string"
 					}
 				],
@@ -1354,6 +1354,45 @@
 					},
 					"201": {
 						"description": "Created"
+					},
+					"401": {
+						"description": "Unauthorized"
+					},
+					"403": {
+						"description": "Forbidden"
+					},
+					"404": {
+						"description": "Not Found"
+					}
+				},
+				"deprecated": false
+			}
+		},
+		"/powerful/member/{id}": {
+			"get": {
+				"tags": [
+					"powerfulh-c"
+				],
+				"summary": "member",
+				"operationId": "memberUsingGET",
+				"produces": [
+					"*/*"
+				],
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"description": "id",
+						"required": true,
+						"type": "string"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/MemberVo"
+						}
 					},
 					"401": {
 						"description": "Unauthorized"
@@ -1709,7 +1748,8 @@
 		"LoginVo": {
 			"type": "object",
 			"required": [
-				"id"
+				"id",
+				"pw"
 			],
 			"properties": {
 				"id": {
@@ -1720,6 +1760,26 @@
 				}
 			},
 			"title": "LoginVo"
+		},
+		"MemberVo": {
+			"type": "object",
+			"properties": {
+				"createdDate": {
+					"type": "string"
+				},
+				"grade": {
+					"type": "integer",
+					"format": "int32"
+				},
+				"id": {
+					"type": "string"
+				},
+				"n": {
+					"type": "integer",
+					"format": "int32"
+				}
+			},
+			"title": "MemberVo"
 		},
 		"Module": {
 			"type": "object",

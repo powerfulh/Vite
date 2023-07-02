@@ -1,5 +1,8 @@
 <script setup>
+import sf from "./util/spring-foxios";
+import swag from "./swag.json"
 
+sf.makeSwagMap(swag)
 </script>
 
 <template>

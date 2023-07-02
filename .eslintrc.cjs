@@ -2,7 +2,7 @@
 require ('@rushstack/eslint-patch/modern-module-resolution');
 
 
-export default {
+module.exports = {
 
   "root": true,
 
