@@ -1,17 +1,20 @@
 {
 	"compilerOptions": {
-		"module": "ES2022", // import.meta 문법
 		"types": ["vite/client"], // import.meta.env 문법
-		"moduleResolution": "Node", // import 모듈 from '노드모듈' 문법
 		"resolveJsonModule": true, // json파일 import
 		"esModuleInterop": true, // export없는 json파일 import
+		"moduleResolution": "Node", // import 모듈 from '노드모듈' 문법
+		"module": "ES2022", // import.meta 문법
 		"lib": [
 			"DOM", // console 같은 dom 관련 변수, 함수 (lib 옵션이 없으면 기본값인데 있으니까 명시해야 함)
-			"ES2018", // Promise.finally
+			"es2022", // 2018: finally, 2021: replaceAll, 2022: Array.prototype.at
 		],
 		"paths": {
 			"@/*": ["./src/*"]
-		}
+			//"@/*": ["src/*"]
+		},
+		"allowJs": true,
+		"outDir": "out",
+		"noImplicitThis": true
 	},
-	"include": ["**/*.ts"] // ts파일만 (.vue는 js 사용)
 }
