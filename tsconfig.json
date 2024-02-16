@@ -1,6 +1,6 @@
 {
 	"compilerOptions": {
-		"types": ["vite/client"], // import.meta.env 문법
+		"types": ["vite/client", "node"], // import.meta.env 문법
 		"resolveJsonModule": true, // json파일 import
 		"esModuleInterop": true, // export없는 json파일 import
 		"moduleResolution": "Node", // import 모듈 from '노드모듈' 문법
