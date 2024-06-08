@@ -22,6 +22,10 @@ const r = createRouter({
 			path: '/api-test',
 			component: () => import('../views/ApiTest.vue'),
 		},
+		{
+			path: '/select',
+			component: () => import('../views/PowerfulSelect.vue'),
+		},
 	],
 })
 
