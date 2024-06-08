@@ -15,10 +15,17 @@ module.exports = {
 				sourceType: 'script',
 			},
 		},
+		{
+			files: '*.d.ts',
+			rules: {
+				'no-unused-vars': 'off',
+			},
+		},
 	],
 	parserOptions: {
 		ecmaVersion: 'latest',
 		sourceType: 'module',
+		parser: '@typescript-eslint/parser',
 	},
 	plugins: ['vue', 'prettier'],
 	rules: {
