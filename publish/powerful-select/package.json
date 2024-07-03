@@ -1,0 +1,21 @@
+{
+	"name": "powerful-select",
+	"version": "0.0.1",
+	"description": "강력한 공통 셀렉트(콤보, 드롭다운) 컴포넌트",
+	"keywords": ["dropdown", "select", "combo"],
+	"homepage": "https://github.com/powerfulh/Vite",
+	"bugs": {
+		"url": "https://github.com/powerfulh/Vite/issues",
+		"email": "hanhoon12@naver.com"
+	},
+	"license": "MIT",
+	"author": {
+		"name": "Powerful H",
+		"email": "hanhoon12@naver.com"
+	},
+	"main": "dist/PowerfulSelect.vue",
+	"repository": {
+		"type": "git",
+		"url": ""
+	}
+}
