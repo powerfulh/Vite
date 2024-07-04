@@ -5,6 +5,7 @@ import { PS } from 'powerful-select'
 const testData = reactive([])
 const testData1 = reactive([])
 const testData2 = reactive([])
+//const testData3 = reactive([])
 const selected = ref('')
 const multiVal = ref('')
 const autoVal = ref('')
@@ -59,6 +60,26 @@ setTimeout(() => {
 			},
 		],
 	)
+	//testData3.push(
+	//	...[
+	//		{
+	//			code: 1,
+	//			text: 'aabbcc',
+	//		},
+	//		{
+	//			code: 2,
+	//			text: 'abc',
+	//		},
+	//		{
+	//			code: 3,
+	//			text: 'bbcc',
+	//		},
+	//		{
+	//			code: 4,
+	//			text: 'dcd',
+	//		},
+	//	],
+	//)
 }, 1000)
 </script>
 
@@ -100,6 +121,7 @@ setTimeout(() => {
 			<div class="label">auto</div>
 			<p-s v-model="autoVal" :list="testData2" auto-comp></p-s>
 		</li>
+		{{ autoVal }}
 		<button @click="selected = 3">test</button>
 	</main>
 </template>

@@ -24,9 +24,10 @@ const prop = defineProps({
 const emit = defineEmits(['update:model-value'])
 
 const inputText = ref('')
+const state = ref('')
 
 const finalList = computed(() => {
-	if (prop.autoComp && inputText.value) {
+	if (prop.autoComp && inputText.value && state.value != 'C') {
 		const disassembleValue = getHeadList(inputText.value)
 		const filtered = filterText([...prop.list], false, true, disassembleValue)
 		const firstList = filterText(filtered, false, false, disassembleValue)
@@ -107,6 +108,11 @@ function filterText(ft = [], left = false, disassemble = false, disassembleValue
 		return !left
 	})
 }
+function inputChange() {
+	state.value = 'C'
+	const found = finalList.value.find(item => inputText.value == getShowText(item))
+	selectItem(found || finalList.value[0])
+}
 
 init()
 
@@ -140,6 +146,9 @@ if (prop.multi != true) {
 			:disabled="disabled"
 			ref="inputDom"
 			@keydown.up.down.prevent="focusEnter"
+			@change="inputChange"
+			@input="state = 'I'"
+			@focus="state = 'F'"
 		/>
 		<!--<button>right btn</button>-->
 		<ul v-show="readonly != true" ref="ulDom">
@@ -149,6 +158,7 @@ if (prop.multi != true) {
 				tabindex="1"
 				:class="{ 'powerful-multi-select': multi && modelValue.includes(item.code) }"
 				@click="({ target }) => onItemClick(item, target)"
+				@mousedown="({ target }) => autoComp && onItemClick(item, target)"
 				@keypress.space.prevent="({ target }) => onItemClick(item, target)"
 				@keypress.enter="({ target }) => onEnterKey(item, target)"
 				@keydown.up.prevent="({ target }) => moveFocus(target)"
