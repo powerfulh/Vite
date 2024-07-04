@@ -1,7 +1,5 @@
 <script setup>
 import { ref, watch } from 'vue'
-// eslint-disable-next-line no-unused-vars
-import { SelectItem } from '..'
 
 const prop = defineProps({
 	/** @type import('vue').PropType<Array<SelectItem>> */

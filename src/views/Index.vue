@@ -14,7 +14,7 @@ onMounted(() => {})
 
 <style scoped lang="scss">
 main {
-	height: 400px;
+	height: 200px;
 	background-image: url(@/assets/vue.svg);
 	background-size: 100% 50%;
 	//background-repeat: no-repeat;

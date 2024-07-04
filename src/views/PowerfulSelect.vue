@@ -1,6 +1,6 @@
 <script setup>
 import { reactive, ref } from 'vue'
-import PS from 'powerful-select'
+import { PS } from 'powerful-select'
 
 const testData = reactive([])
 const testData1 = reactive([])
