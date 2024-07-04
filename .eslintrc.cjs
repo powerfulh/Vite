@@ -38,7 +38,7 @@ module.exports = {
 				singleQuote: true,
 				semi: false,
 				arrowParens: 'avoid',
-				printWidth: 130,
+				printWidth: 160,
 			},
 		],
 		'vue/multi-word-component-names': [

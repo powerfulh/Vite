@@ -20,7 +20,7 @@ setTimeout(() => {
 			},
 		],
 	)
-}, 1500)
+}, 1000)
 </script>
 
 <template>
@@ -51,6 +51,9 @@ div.powerful-select-wrap {
 		background-color: darkblue;
 		width: 100%;
 		padding-inline-start: 0;
+		> li.powerful-multi-select {
+			background-color: darkgoldenrod;
+		}
 		> li:hover {
 			background-color: darkcyan;
 		}

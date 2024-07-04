@@ -37,16 +37,30 @@ function selectItem(item) {
 	inputText.value = item.text
 }
 /** @param {SelectItem} item */
+function toggleItem(item) {
+	const current = prop.modelValue ? prop.modelValue.split(',') : []
+	const itemCode = item.code.toString()
+	if (current.includes(itemCode)) {
+		const result = current.filter(c => c != itemCode)
+		emit('update:model-value', result.join())
+		inputText.value = result.map(c => prop.list.find(li => li.code == c).text).join()
+	} else {
+		current.push(itemCode)
+		emit('update:model-value', current.join())
+		inputText.value = current.map(c => prop.list.find(li => li.code == c).text).join()
+	}
+}
+/** @param {SelectItem} item */
 function onItemClick(item, target) {
 	if (prop.multi) {
-		// todo
+		toggleItem(item)
 	} else {
 		selectItem(item)
 		target.blur()
 	}
 }
 function init() {
-	if (prop.list.length) selectItem(prop.list[0])
+	if (prop.list.length && prop.multi != true) selectItem(prop.list[0])
 }
 
 init()
@@ -56,23 +70,34 @@ const ulDom = ref()
 const inputDom = ref()
 
 watch(prop.list, init)
-watch(
-	() => prop.modelValue,
-	nv => {
-		inputText.value = prop.list.find(item => item.code == nv)?.text || 'Invalid model'
-	},
-)
+if (prop.multi != true) {
+	watch(
+		() => prop.modelValue,
+		nv => {
+			inputText.value = prop.list.find(item => item.code == nv)?.text || 'Invalid model'
+		},
+	)
+}
 </script>
 
 <template>
 	<div class="powerful-select-wrap">
-		<select :value="modelValue">
+		<!--<template v-if="multi">
+			<input v-for="(item, i) in list" :key="i" type="checkbox" :value="item.code" />
+		</template>
+		<select v-else :value="modelValue">
 			<option v-for="(item, i) in list" :key="i" :value="item.code">{{ item.text }}</option>
-		</select>
+		</select>-->
 		<input v-model="inputText" autocomplete="off" :readonly="readonly" :disabled="disabled" ref="inputDom" @focus="onFocus" />
 		<!--<button>right btn</button>-->
 		<ul v-show="readonly != true" ref="ulDom">
-			<li v-for="(item, i) in list" :key="i" tabindex="1" @click="({ target }) => onItemClick(item, target)">
+			<li
+				v-for="(item, i) in list"
+				:key="i"
+				tabindex="1"
+				:class="{ 'powerful-multi-select': multi && modelValue.includes(item.code) }"
+				@click="({ target }) => onItemClick(item, target)"
+			>
 				{{ item.text }}
 			</li>
 		</ul>
