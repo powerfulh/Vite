@@ -1,6 +1,6 @@
 import { ComponentOptionsMixin, ComponentPropsOptions, ComputedOptions, DefineComponent, MethodOptions } from 'vue'
 
-interface SelectItem {
+export interface SelectItem {
 	code: string | number
 	text: string
 }
