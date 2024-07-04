@@ -1,6 +1,6 @@
 <script setup>
-import { ref, watch } from 'vue'
-import { moveFocus } from '.'
+import { computed, ref, watch } from 'vue'
+import { getHeadList, moveFocus } from '.'
 
 const prop = defineProps({
 	/** @type import('vue').PropType<Array<SelectItem>> */
@@ -24,6 +24,19 @@ const prop = defineProps({
 const emit = defineEmits(['update:model-value'])
 
 const inputText = ref('')
+
+const finalList = computed(() => {
+	if (prop.autoComp && inputText.value) {
+		const disassembleValue = getHeadList(inputText.value)
+		const filtered = filterText([...prop.list], false, true, disassembleValue)
+		const firstList = filterText(filtered, false, false, disassembleValue)
+		const secondList = filterText(filtered, true, false, disassembleValue)
+		const result = firstList
+		if (result.length == 0) result.push(...secondList)
+		return result
+	}
+	return prop.list
+})
 
 function focusEnter() {
 	if (prop.list.length) ulDom.value.children[0].focus()
@@ -79,6 +92,21 @@ function onEnterKey(item, target) {
 function getFocusableList() {
 	return document.querySelectorAll('a, button, input, textarea, select, [tabindex="0"]')
 }
+/** @param {SelectItem} item */
+function getShowText(item) {
+	return item.text
+}
+function filterText(ft = [], left = false, disassemble = false, disassembleValue) {
+	return ft.filter(item => {
+		const disassembleItem = disassemble ? getHeadList(getShowText(item)) : getShowText(item).split('')
+		for (const letter of disassemble ? disassembleValue : inputText.value.split('')) {
+			const findedIndex = disassembleItem.findIndex(itemLetter => itemLetter.toUpperCase() == letter.toUpperCase())
+			if (findedIndex > -1) disassembleItem.splice(0, findedIndex + 1)
+			else return left
+		}
+		return !left
+	})
+}
 
 init()
 
@@ -116,7 +144,7 @@ if (prop.multi != true) {
 		<!--<button>right btn</button>-->
 		<ul v-show="readonly != true" ref="ulDom">
 			<li
-				v-for="(item, i) in list"
+				v-for="(item, i) in finalList"
 				:key="i"
 				tabindex="1"
 				:class="{ 'powerful-multi-select': multi && modelValue.includes(item.code) }"
