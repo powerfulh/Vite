@@ -1,9 +1,11 @@
 <script setup>
 import { reactive, ref } from 'vue'
-import PS from '@/components/PowerfulSelect.vue'
+import PS from 'powerful-select'
 
 const testData = reactive([])
+const testData1 = reactive([])
 const selected = ref('')
+const multiVal = ref('')
 
 setTimeout(() => {
 	console.log('set')
@@ -20,6 +22,22 @@ setTimeout(() => {
 			},
 		],
 	)
+	testData1.push(
+		...[
+			{
+				code: 1,
+				text: 'a',
+			},
+			{
+				code: 2,
+				text: 'b',
+			},
+			{
+				code: 3,
+				text: 'c',
+			},
+		],
+	)
 }, 1000)
 </script>
 
@@ -28,13 +46,14 @@ setTimeout(() => {
 		<h1>Powerful Select</h1>
 		<li>
 			<div class="label">a</div>
-			<input type="text" />
-		</li>
-		<li>
-			<div class="label">b</div>
 			<p-s v-model="selected" :list="testData"></p-s>
 		</li>
 		{{ selected }}
+		<li>
+			<div class="label">b</div>
+			<p-s v-model="multiVal" :list="testData1" multi></p-s>
+		</li>
+		{{ multiVal }}
 		<button @click="selected = 3">test</button>
 	</main>
 </template>
@@ -51,6 +70,7 @@ div.powerful-select-wrap {
 		background-color: darkblue;
 		width: 100%;
 		padding-inline-start: 0;
+		z-index: 1;
 		> li.powerful-multi-select {
 			background-color: darkgoldenrod;
 		}

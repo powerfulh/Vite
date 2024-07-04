@@ -17,5 +17,6 @@
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/powerfulh/Vite/tree/master/publish/powerful-select"
-	}
+	},
+	"types": "index.d.ts"
 }
