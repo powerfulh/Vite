@@ -41,5 +41,11 @@ module.exports = {
 				printWidth: 130,
 			},
 		],
+		'vue/multi-word-component-names': [
+			'error',
+			{
+				ignores: ['Index'],
+			},
+		],
 	},
 }
