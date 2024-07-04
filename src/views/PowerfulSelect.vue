@@ -8,7 +8,6 @@ const selected = ref('')
 const multiVal = ref('')
 
 setTimeout(() => {
-	console.log('set')
 	testData.length = 0
 	testData.push(
 		...[
@@ -44,16 +43,37 @@ setTimeout(() => {
 <template>
 	<main>
 		<h1>Powerful Select</h1>
+		<div style="height: 300px">Pad</div>
+		<li>
+			<div class="label">some text</div>
+			<input type="text" />
+		</li>
+		<li>
+			<div class="label">some select</div>
+			<select>
+				<option value="1">abd</option>
+				<option value="2">ab2</option>
+				<option value="3">a2</option>
+			</select>
+		</li>
 		<li>
 			<div class="label">a</div>
 			<p-s v-model="selected" :list="testData"></p-s>
 		</li>
 		{{ selected }}
 		<li>
+			<div class="label">some text</div>
+			<input type="text" />
+		</li>
+		<li>
 			<div class="label">b</div>
 			<p-s v-model="multiVal" :list="testData1" multi></p-s>
 		</li>
 		{{ multiVal }}
+		<li>
+			<div class="label">some text</div>
+			<input type="text" />
+		</li>
 		<button @click="selected = 3">test</button>
 	</main>
 </template>
@@ -61,7 +81,7 @@ setTimeout(() => {
 <style lang="scss">
 div.label {
 	display: inline-block;
-	width: 20px;
+	width: 100px;
 }
 div.powerful-select-wrap {
 	display: inline-block;
@@ -74,9 +94,14 @@ div.powerful-select-wrap {
 		> li.powerful-multi-select {
 			background-color: darkgoldenrod;
 		}
-		> li:hover {
+		> li:hover,
+		> li:focus {
 			background-color: darkcyan;
 		}
 	}
+}
+input,
+select {
+	width: 160px;
 }
 </style>

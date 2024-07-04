@@ -47,5 +47,8 @@ module.exports = {
 				ignores: ['Index'],
 			},
 		],
+		'no-console': 'warn',
+		'no-debugger': 'error',
+		'no-alert': 'warn',
 	},
 }

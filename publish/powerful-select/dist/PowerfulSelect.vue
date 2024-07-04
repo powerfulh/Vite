@@ -1,5 +1,6 @@
 <script setup>
 import { ref, watch } from 'vue'
+import { moveFocus } from '.'
 
 const prop = defineProps({
 	/** @type import('vue').PropType<Array<SelectItem>> */
@@ -27,10 +28,10 @@ const inputText = ref('')
 function focusEnter() {
 	if (prop.list.length) ulDom.value.children[0].focus()
 }
-function onFocus({ target }) {
-	if (prop.autoComp != true) target.blur()
-	focusEnter()
-}
+//function onFocus({ target }) {
+//	if (prop.autoComp != true) target.blur()
+//	focusEnter()
+//}
 /** @param {SelectItem} item */
 function selectItem(item) {
 	emit('update:model-value', item.code)
@@ -62,6 +63,22 @@ function onItemClick(item, target) {
 function init() {
 	if (prop.list.length && prop.multi != true) selectItem(prop.list[0])
 }
+function onEnterKey(item, target) {
+	onItemClick(item, target)
+	if (prop.multi) target.blur()
+	const fl = getFocusableList()
+	let focusNow
+	fl.forEach(node => {
+		if (focusNow) {
+			focusNow = false
+			node.focus()
+			return
+		} else if (node == inputDom.value) focusNow = true
+	})
+}
+function getFocusableList() {
+	return document.querySelectorAll('a, button, input, textarea, select, [tabindex="0"]')
+}
 
 init()
 
@@ -88,7 +105,14 @@ if (prop.multi != true) {
 		<select v-else :value="modelValue">
 			<option v-for="(item, i) in list" :key="i" :value="item.code">{{ item.text }}</option>
 		</select>-->
-		<input v-model="inputText" autocomplete="off" :readonly="readonly" :disabled="disabled" ref="inputDom" @focus="onFocus" />
+		<input
+			v-model="inputText"
+			autocomplete="off"
+			:readonly="readonly || autoComp != true"
+			:disabled="disabled"
+			ref="inputDom"
+			@keydown.up.down.prevent="focusEnter"
+		/>
 		<!--<button>right btn</button>-->
 		<ul v-show="readonly != true" ref="ulDom">
 			<li
@@ -97,6 +121,10 @@ if (prop.multi != true) {
 				tabindex="1"
 				:class="{ 'powerful-multi-select': multi && modelValue.includes(item.code) }"
 				@click="({ target }) => onItemClick(item, target)"
+				@keypress.space.prevent="({ target }) => onItemClick(item, target)"
+				@keypress.enter="({ target }) => onEnterKey(item, target)"
+				@keydown.up.prevent="({ target }) => moveFocus(target)"
+				@keydown.down.prevent="({ target }) => moveFocus(target, true)"
 			>
 				{{ item.text }}
 			</li>
