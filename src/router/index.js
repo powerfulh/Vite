@@ -9,6 +9,10 @@ const r = createRouter({
 			name: '인덱스',
 			component: () => import('../views/Index.vue'),
 		},
+		{
+			path: '/modal',
+			component: () => import('../views/UseModal.vue'),
+		},
 		...drag,
 		{
 			path: '/grid',
