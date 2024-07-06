@@ -23,3 +23,13 @@
 ### 자동 완성 기능
 
 ### 키보드 작업 완벽 지원
+
+## 사용법
+
+- select.d.ts 에 정의된 데이타 양식에 맞춰 컴포넌트 초기화
+```ts
+interface SelectItem {
+	code: string | number
+	text: string
+}
+```

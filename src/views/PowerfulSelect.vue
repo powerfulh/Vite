@@ -139,7 +139,7 @@ div.powerful-select-wrap {
 		width: 100%;
 		padding-inline-start: 0;
 		z-index: 1;
-		> li.powerful-multi-select {
+		> li.multi-select {
 			background-color: darkgoldenrod;
 		}
 		> li:hover,

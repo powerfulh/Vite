@@ -156,7 +156,7 @@ if (prop.multi != true) {
 				v-for="(item, i) in finalList"
 				:key="i"
 				tabindex="1"
-				:class="{ 'powerful-multi-select': multi && modelValue.includes(item.code) }"
+				:class="{ 'multi-select': multi && modelValue.includes(item.code) }"
 				@click="({ target }) => onItemClick(item, target)"
 				@mousedown="({ target }) => autoComp && onItemClick(item, target)"
 				@keypress.space.prevent="({ target }) => onItemClick(item, target)"
