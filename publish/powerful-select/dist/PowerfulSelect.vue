@@ -109,6 +109,7 @@ function filterText(ft = [], left = false, disassemble = false, disassembleValue
 	})
 }
 function inputChange() {
+	if (prop.autoComp) return
 	state.value = 'C'
 	const found = finalList.value.find(item => inputText.value == getShowText(item))
 	selectItem(found || finalList.value[0])
@@ -133,12 +134,6 @@ if (prop.multi != true) {
 
 <template>
 	<div class="powerful-select-wrap">
-		<!--<template v-if="multi">
-			<input v-for="(item, i) in list" :key="i" type="checkbox" :value="item.code" />
-		</template>
-		<select v-else :value="modelValue">
-			<option v-for="(item, i) in list" :key="i" :value="item.code">{{ item.text }}</option>
-		</select>-->
 		<input
 			v-model="inputText"
 			autocomplete="off"
