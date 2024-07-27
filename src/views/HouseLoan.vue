@@ -5,6 +5,7 @@ import dayjs from 'dayjs'
 const rate = 0.028
 let loanMoney = 260000000
 let d = dayjs('202408')
+let paidInter = 0
 
 function getCurrentMonthInterest() {
 	return (loanMoney * rate) / 12
@@ -22,6 +23,7 @@ function getText(m) {
 	const total = paidMoney + inter
 	//const text = `${} 원금 ${} + 이자 ${} = ${} 갚고 남은 원금 ${}`
 	const result = [{ d: d.format('YYYY/MM'), paidMoney, inter, total, loanMoney }]
+	paidInter += inter
 	d = d.add(1, 'month')
 	return result
 }
@@ -59,6 +61,10 @@ function getText(m) {
 					<span class="len-9">{{ nf(t.loanMoney) }}</span>
 				</template>
 			</li>
+			낸 이자:
+			{{
+				nf(paidInter)
+			}}
 		</ol>
 	</main>
 </template>
