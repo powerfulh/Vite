@@ -10,6 +10,10 @@ const r = createRouter({
 			component: () => import('../views/Index.vue'),
 		},
 		{
+			path: '/loan',
+			component: () => import('../views/HouseLoan.vue'),
+		},
+		{
 			path: '/modal',
 			component: () => import('../views/UseModal.vue'),
 		},
