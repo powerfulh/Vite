@@ -4,7 +4,7 @@ import dayjs from 'dayjs'
 
 const rate = 0.028
 let loanMoney = 260000000
-let d = dayjs('202408')
+let d = dayjs('202409')
 let paidInter = 0
 
 function getCurrentMonthInterest() {
@@ -18,8 +18,8 @@ function nf(n) {
 	return numeral(n).format('0,0')
 }
 function getText(m) {
-	const paidMoney = pay(Math.round(m))
 	const inter = Math.round(getCurrentMonthInterest())
+	const paidMoney = pay(Math.round(m))
 	const total = paidMoney + inter
 	//const text = `${} 원금 ${} + 이자 ${} = ${} 갚고 남은 원금 ${}`
 	const result = [{ d: d.format('YYYY/MM'), paidMoney, inter, total, loanMoney }]
