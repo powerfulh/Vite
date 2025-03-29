@@ -6,20 +6,9 @@ onMounted(() => {})
 
 <template>
 	<div>
-		<p>Long sentence~~</p>
-		<main></main>
-		<main class="png"></main>
+		<p>Vite will be delete</p>
+		<main>Move contents to Powerful vite before delete</main>
 	</div>
 </template>
 
-<style scoped lang="scss">
-main {
-	height: 200px;
-	background-image: url(@/assets/vue.svg);
-	background-size: 100% 50%;
-	//background-repeat: no-repeat;
-	&.png {
-		background-image: url(@/assets/a.png);
-	}
-}
-</style>
+<style scoped lang="scss"></style>
